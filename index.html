@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Collision- and Reachability-Aware Multi-Robot Control with Grounded LLM Planners">
+  <meta name="keywords" content="LLM, Multi-Robot, BoxNet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Collision- and Reachability-Aware Multi-Robot Control with Grounded LLM Planners</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script> -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="./static/images/neurips-icon.png"> -->
+  <link rel="icon" href="./static/images/giblli-multirob.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <style>
+    code { background: #eee; padding: 2px 5px; border-radius: 3px; }
+    .markdown-content {
+      max-width: 800px;
+      max-height: 600px;
+      overflow-y: auto;
+      margin: 10px auto;
+      padding: 25px;
+      border: 1px solid #e0e0e0;
+      overflow-y: auto; 
+      border-radius: 8px;
+      background-color: #ffffff;
+  }
+  </style>
+
+  <script>
+    marked.setOptions({
+      highlight: function(code, lang) {
+          const language = hljs.getLanguage(lang) ? lang : 'plaintext'; // Fallback to plaintext if language not found
+          return hljs.highlight(code, { language }).value;
+      },
+      langPrefix: 'hljs language-', // Add the hljs class for highlight.js to pick up
+    });
+
+    function loadMarkdownIntoDiv(markdownFile, divId) {
+      fetch(markdownFile)
+        .then(response => {
+          if (!response.ok) throw new Error('Markdown file not found');
+          return response.text();
+        })
+        .then(markdown => {
+          console.log("Markdown content loaded:", markdown);
+          document.getElementById(divId).innerHTML = marked.parse(markdown);
+        })
+        .catch(error => {
+          document.getElementById(divId).textContent = 'Error loading markdown file.';
+          console.error(`Error loading ${markdownFile}:`, error);
+        });
+    }
+  </script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-9 has-text-centered">
+          <h1 class="title is-1">Collision- and Reachability-Aware Multi-Robot Control with Grounded LLM Planners</h1>
+          <h2 class="subtitle is-4"><b>ICLR 2026 Submission, Under Review</b></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-9">
+        <img src="static/videos/teaser-3d-44-0.gif" alt="Teaser 2" width="100%">
+      </div>
+      <div class="column is-9">
+        <img src="static/videos/teaser-3d-44-1.gif" alt="Teaser 2" width="100%">
+      </div>
+    </div>
+    <h2 class="subtitle has-text-centered" style="color:red">
+      <b>TLDR</b>: We propose a framework to integrate physical constraint knowledge into two small-scale 3B/4B LLMs and implement two BoxNet-based environments. Experiments show that our method significantly outperforms state-of-the-art LLMs in these multi-robot control tasks such as GPT-4o/o4mini, and larger LLMs with 32B params.
+    </h2>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-3 has-text-centered">Additional Examples</h2>
+        <div class="content has-text-justified">
+          <p>
+            This website presents the example reasoning trace and the action trace generated by our grounded LLM planners for BoxNet2D and BoxNet3D environments. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-3 has-text-centered">BoxNet2D</h2>
+        <div class="content has-text-centered">
+          <div class="columns is-centered">
+            <div class="column is-9">
+              <figure>
+                <img src="static/videos/2d870.gif" alt="BoxNet2D FullPlan Example 1" width="80%" />
+                <figcaption>Figure 1: BoxNet2D FullPlan Example 1</figcaption>
+              </figure>
+              <div id="2d-full-0" class="content has-text-justified markdown-content">
+                <script>
+                    loadMarkdownIntoDiv('static/markdowns/2d-full-0.md', '2d-full-0');
+                </script>
+              </div>
+            </div>
+            <div class="column is-9">
+              <figure>
+                <img src="static/videos/2d886.gif" alt="BoxNet2D FullPlan Example 2" width="80%" />
+                <figcaption>Figure 2: BoxNet2D FullPlan Example 2</figcaption>
+              </figure>
+              <div id="2d-full-1" class="content has-text-justified markdown-content">
+                <script>
+                    loadMarkdownIntoDiv('static/markdowns/2d-full-1.md', '2d-full-1');
+                </script>
+              </div>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-3 has-text-centered">BoxNet3D</h2>
+        <div class="content has-text-centered">
+          <div class="columns is-centered">
+            <div class="column is-9">
+              <figure>
+                <img src="static/videos/3d614.gif" alt="BoxNet3D FullPlan Example 1" width="105%" />
+                <figcaption>Figure 3: BoxNet3D FullPlan Example 1</figcaption>
+              </figure>
+              <div id="3d-full-0" class="content has-text-justified markdown-content">
+                <script>
+                    loadMarkdownIntoDiv('static/markdowns/3d-full-0.md', '3d-full-0');
+                </script>
+              </div>
+            </div>
+            <div class="column is-9">
+              <figure>
+                <img src="static/videos/3d-52.gif" alt="BoxNet3D FullPlan Example 2" width="105%" />
+                <figcaption>Figure 4: BoxNet3D FullPlan Example 2</figcaption>
+              </figure>
+              <div id="3d-full-1" class="content has-text-justified markdown-content">
+                <script>
+                    loadMarkdownIntoDiv('static/markdowns/3d-full-1.md', '3d-full-1');
+                </script>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-3 has-text-centered">Acknowledgement</h2>
+        <div class="content has-text-centered">
+          Our implementation is largely inspired by many previous works, including:
+          <a href="https://mujoco.readthedocs.io/en/stable/overview.html">MuJoCo</a>,
+          <a href="https://yongchao98.github.io/MIT-REALM-Multi-Robot/">Scalable Multi-Robot</a>, and <a href="https://project-roco.github.io">RoCoBench</a>.
+          We want to thank the authors for open-sourcing their works.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is modified based on <a href="https://nerfies.github.io">nerfies website</a> template. We appreciate the authors for open-sourcing the <a href="https://github.com/nerfies/nerfies.github.io">code</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

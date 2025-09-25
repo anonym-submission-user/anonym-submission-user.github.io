@@ -1,1 +1,1 @@
-# anonym-submission-user.github.io
+# An anonymous submission
